@@ -1,0 +1,8 @@
+.settings
+lib
+.project
+.classpath
+WebContent/VAADIN/widgetsets
+WebContent/VAADIN/themes/reindeer
+WebContent/VAADIN/themes/base
+build

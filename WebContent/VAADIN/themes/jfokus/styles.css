@@ -1,0 +1,10 @@
+@import "../base/styles.css";
+
+.main-layout .v-csslayout-margin {
+	padding: 10px;
+}
+
+
+.v-table-body {
+	border-radius: 15px;
+}
