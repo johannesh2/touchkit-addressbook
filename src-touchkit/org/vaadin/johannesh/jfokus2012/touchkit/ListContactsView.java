@@ -27,7 +27,6 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Table;
 
 public class ListContactsView extends NavigationView {

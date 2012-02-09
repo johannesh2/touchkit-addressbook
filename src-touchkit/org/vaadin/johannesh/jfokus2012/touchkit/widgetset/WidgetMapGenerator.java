@@ -31,6 +31,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.terminal.Paintable;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Form;
@@ -62,6 +63,7 @@ public class WidgetMapGenerator extends TouchKitWidgetMapGenerator {
         a.add(Button.class);
         a.add(CssLayout.class);
         a.add(Form.class);
+        a.add(ComboBox.class);
 
         a.add(Embedded.class);
         a.add(Upload.class);

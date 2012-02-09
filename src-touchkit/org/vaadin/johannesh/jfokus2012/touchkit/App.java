@@ -87,7 +87,7 @@ public class App extends TouchKitApplication {
         return app.persons;
     }
 
-    public static JPAContainer<Company> getCompaniesCachingContainer() {
+    public static JPAContainer<Company> getCompaniesContainer() {
         App app = getApp();
         if (app.companies == null) {
             app.companies = JPAContainerFactory.make(Company.class, EMF

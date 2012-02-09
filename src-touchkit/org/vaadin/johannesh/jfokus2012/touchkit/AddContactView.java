@@ -20,8 +20,6 @@ package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import java.util.ResourceBundle;
 
-import javax.persistence.EntityManager;
-
 import org.vaadin.addon.formbinder.ViewBoundForm;
 import org.vaadin.johannesh.jfokus2012.domain.Person;
 
@@ -33,6 +31,7 @@ import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.TextField;
 
@@ -111,6 +110,7 @@ public class AddContactView extends NavigationView {
         private static final long serialVersionUID = 1L;
         private TextField firstNameField;
         private TextField lastNameField;
+        private ComboBox companyField;
         private TextField mobileField;
         private EmailField emailField;
         private Switch favouriteField;
@@ -125,6 +125,11 @@ public class AddContactView extends NavigationView {
             lastNameField = new TextField(tr.getString("lastName"));
             lastNameField.setWidth("100%");
             lastNameField.setNullRepresentation("");
+            companyField = new ComboBox(tr.getString("company"));
+            companyField.setContainerDataSource(App.getCompaniesContainer());
+            companyField.setWidth("100%");
+            companyField.setNullSelectionAllowed(true);
+
             mobileField = new TelField(tr.getString("mobile"));
             mobileField.setWidth("100%");
             mobileField.setNullRepresentation("");
@@ -136,6 +141,7 @@ public class AddContactView extends NavigationView {
             VerticalComponentGroup group = new VerticalComponentGroup("");
             group.addComponent(firstNameField);
             group.addComponent(lastNameField);
+            group.addComponent(companyField);
             addComponent(group);
             group = new VerticalComponentGroup("");
             group.addComponent(mobileField);

@@ -20,18 +20,22 @@ package org.vaadin.johannesh.jfokus2012.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Person extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @NotNull
     private String firstName;
 
     private String lastName;
 
     private String email;
 
+    @Size(min = 3, max = 15)
     private String mobile;
 
     private String pictureUri;

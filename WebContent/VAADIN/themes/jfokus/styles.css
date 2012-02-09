@@ -41,3 +41,7 @@
 	border-top-right-radius: 9px;
 	border: 1px solid #BBB;
 }
+
+.v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-caption {
+	text-transform: lowercase;
+}
