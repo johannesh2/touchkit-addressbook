@@ -20,6 +20,7 @@ package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import java.util.ResourceBundle;
 
+import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
@@ -33,7 +34,7 @@ public class ListContactsView extends NavigationView {
 
     private static final long serialVersionUID = 1L;
     private ResourceBundle tr;
-    private CssLayout layout;
+    private static final String GENERATED_COLUMN_0 = "generatedCol0";
 
     public ListContactsView(String caption) {
         super(caption);
@@ -48,27 +49,30 @@ public class ListContactsView extends NavigationView {
         Button addButton = new Button(tr.getString("add"),
                 rightComponentClickListener);
         setRightComponent(addButton);
-        layout = new CssLayout();
-        layout.setSizeFull();
-        layout.addStyleName("main-layout");
+
         final Table table = new Table("", App.getPersonsContainer());
         table.addStyleName("contacts");
         table.setSizeFull();
         table.setColumnHeaderMode(Table.COLUMN_HEADER_MODE_HIDDEN);
-        table.addGeneratedColumn("fullName", new Table.ColumnGenerator() {
-            @Override
-            public Object generateCell(Table source, Object itemId,
-                    Object columnId) {
-                if ("fullName".equals(columnId)) {
-                    return source.getContainerProperty(itemId, "firstName")
-                            + " "
-                            + source.getContainerProperty(itemId, "lastName");
-                }
-                return null;
-            }
-        });
-        table.setVisibleColumns(new String[] { "fullName" });
-        table.setSelectable(true);
+        table.addGeneratedColumn(GENERATED_COLUMN_0,
+                new Table.ColumnGenerator() {
+                    @Override
+                    public Object generateCell(Table source, Object itemId,
+                            Object columnId) {
+                        if (GENERATED_COLUMN_0.equals(columnId)) {
+                            final Object first = source.getContainerProperty(
+                                    itemId, "firstName").getValue();
+                            final Object last = source.getContainerProperty(
+                                    itemId, "lastName").getValue();
+                            final String caption = String.format("%s %s",
+                                    first != null ? first : "",
+                                    last != null ? last : "").trim();
+                            return new NavigationButton(caption);
+                        }
+                        return null;
+                    }
+                });
+        table.setVisibleColumns(new String[] { GENERATED_COLUMN_0 });
         table.addListener(new ItemClickListener() {
             @Override
             public void itemClick(ItemClickEvent event) {
@@ -80,8 +84,7 @@ public class ListContactsView extends NavigationView {
                 }
             }
         });
-        layout.addComponent(table);
-        setContent(layout);
+        setContent(table);
 
     }
 
