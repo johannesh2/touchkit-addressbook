@@ -19,8 +19,6 @@ package org.vaadin.johannesh.jfokus2012.touchkit.widgetset;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.vaadin.addon.formbinder.ViewBoundForm;
-
 import com.vaadin.addon.touchkit.gwt.TouchKitWidgetMapGenerator;
 import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.addon.touchkit.ui.NavigationBar;
@@ -48,24 +46,24 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 public class WidgetMapGenerator extends TouchKitWidgetMapGenerator {
-	@Override
-	protected Collection<Class<? extends Paintable>> getUsedPaintables() {
-		ArrayList<Class<? extends Paintable>> a = new ArrayList<Class<? extends Paintable>>();
-	    a.add(Switch.class);
-	    a.add(NavigationBar.class);
-	    a.add(NavigationButton.class);
-	    a.add(NavigationManager.class);
-	    a.add(VerticalComponentGroup.class);
-	    a.add(org.vaadin.johannesh.jfokus2012.touchkit.TelField.class);
-	    a.add(NavigationView.class);
-	    a.add(NumberField.class);
-	    a.add(EmailField.class);
-	    a.add(TextField.class);
-	    a.add(Button.class);
-	    a.add(CssLayout.class);
-	    a.add(Form.class);
-	    
-	    a.add(Embedded.class);
+    @Override
+    protected Collection<Class<? extends Paintable>> getUsedPaintables() {
+        ArrayList<Class<? extends Paintable>> a = new ArrayList<Class<? extends Paintable>>();
+        a.add(Switch.class);
+        a.add(NavigationBar.class);
+        a.add(NavigationButton.class);
+        a.add(NavigationManager.class);
+        a.add(VerticalComponentGroup.class);
+        a.add(org.vaadin.johannesh.jfokus2012.touchkit.TelField.class);
+        a.add(NavigationView.class);
+        a.add(NumberField.class);
+        a.add(EmailField.class);
+        a.add(TextField.class);
+        a.add(Button.class);
+        a.add(CssLayout.class);
+        a.add(Form.class);
+
+        a.add(Embedded.class);
         a.add(Upload.class);
         a.add(VerticalLayout.class);
         a.add(HorizontalLayout.class);
@@ -76,6 +74,6 @@ public class WidgetMapGenerator extends TouchKitWidgetMapGenerator {
         a.add(MenuBar.class);
         a.add(Panel.class);
         a.add(Window.class);
-	    return a;
-	}
+        return a;
+    }
 }
