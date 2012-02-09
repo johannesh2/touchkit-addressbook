@@ -26,7 +26,7 @@ import org.vaadin.johannesh.jfokus2012.domain.EMF;
 import org.vaadin.johannesh.jfokus2012.domain.Person;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
-import com.vaadin.addon.jpacontainer.provider.CachingLocalEntityProvider;
+import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.TouchKitApplication;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
@@ -41,20 +41,8 @@ public class App extends TouchKitApplication {
     @Override
     public void init() {
         configureMainWindow();
+        setLocale(Locale.ENGLISH);
         setTheme("jfokus");
-    }
-
-    @Override
-    public void onBrowserDetailsReady() {
-        // TODO Auto-generated method stub
-        ListContactsView listView = new ListContactsView(getTr(getLocale())
-                .getString("listContactsView"));
-        ListGroupsView listGroups = new ListGroupsView(getTr(getLocale())
-                .getString("listGroupsView"));
-        navigationManager = new NavigationManager();
-        navigationManager.setCurrentComponent(listView);
-        navigationManager.setPreviousComponent(listGroups);
-        mainWindow.setContent(navigationManager);
     }
 
     private void configureMainWindow() {
@@ -65,6 +53,18 @@ public class App extends TouchKitApplication {
         mainWindow.setWebAppCapable(true);
         mainWindow.setPersistentSessionCookie(true);
         setMainWindow(mainWindow);
+    }
+
+    @Override
+    public void onBrowserDetailsReady() {
+        ListContactsView listView = new ListContactsView(getTr(getLocale())
+                .getString("listContactsView"));
+        ListGroupsView listGroups = new ListGroupsView(getTr(getLocale())
+                .getString("listGroupsView"));
+        navigationManager = new NavigationManager();
+        navigationManager.setCurrentComponent(listView);
+        navigationManager.setPreviousComponent(listGroups);
+        mainWindow.setContent(navigationManager);
     }
 
     public static App getApp() {
@@ -78,14 +78,11 @@ public class App extends TouchKitApplication {
         return ResourceBundle.getBundle("CaptionsBundle", locale);
     }
 
-    public static JPAContainer<Person> getPersonsCachingContainer() {
+    public static JPAContainer<Person> getPersonsContainer() {
         App app = getApp();
         if (app.persons == null) {
-            app.persons = new JPAContainer<Person>(Person.class);
-            app.persons
-                    .setEntityProvider(new CachingLocalEntityProvider<Person>(
-                            Person.class, EMF.getEntityManagerFactory()
-                                    .createEntityManager()));
+            app.persons = JPAContainerFactory.make(Person.class, EMF
+                    .getEntityManagerFactory().createEntityManager());
         }
         return app.persons;
     }
@@ -93,11 +90,8 @@ public class App extends TouchKitApplication {
     public static JPAContainer<Company> getCompaniesCachingContainer() {
         App app = getApp();
         if (app.companies == null) {
-            app.companies = new JPAContainer<Company>(Company.class);
-            app.companies
-                    .setEntityProvider(new CachingLocalEntityProvider<Company>(
-                            Company.class, EMF.getEntityManagerFactory()
-                                    .createEntityManager()));
+            app.companies = JPAContainerFactory.make(Company.class, EMF
+                    .getEntityManagerFactory().createEntityManager());
         }
         return app.companies;
     }

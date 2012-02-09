@@ -37,7 +37,7 @@ public class ShowContactView extends NavigationView {
     }
 
     private void buildLayout() {
-        App.getPersonsCachingContainer().getItem(personId);
+        App.getPersonsContainer().getItem(personId);
     }
 
 }

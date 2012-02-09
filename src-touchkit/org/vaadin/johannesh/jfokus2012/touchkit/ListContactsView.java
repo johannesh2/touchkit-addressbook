@@ -51,7 +51,7 @@ public class ListContactsView extends NavigationView {
         layout = new CssLayout();
         layout.setSizeFull();
         layout.addStyleName("main-layout");
-        final Table table = new Table("", App.getPersonsCachingContainer());
+        final Table table = new Table("", App.getPersonsContainer());
         table.addStyleName("contacts");
         table.setSizeFull();
         table.setColumnHeaderMode(Table.COLUMN_HEADER_MODE_HIDDEN);

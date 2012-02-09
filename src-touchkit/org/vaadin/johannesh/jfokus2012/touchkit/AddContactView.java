@@ -84,17 +84,8 @@ public class AddContactView extends NavigationView {
             @Override
             public void buttonClick(ClickEvent event) {
                 form.commit();
-                JPAContainer<Person> persons = App.getPersonsCachingContainer();
-                EntityManager em = persons.getEntityProvider()
-                        .getEntityManager();
-                try {
-                    em.getTransaction().begin();
-                    em.persist(item.getBean());
-                    em.getTransaction().commit();
-                    persons.refresh();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                JPAContainer<Person> persons = App.getPersonsContainer();
+                persons.addEntity(item.getBean());
                 getNavigationManager().navigateBack();
             }
         });
