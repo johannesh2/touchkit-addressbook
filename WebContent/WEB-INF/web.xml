@@ -7,6 +7,16 @@
 		<param-name>productionMode</param-name>
 		<param-value>false</param-value>
 	</context-param>
+	<listener>
+		<listener-class>
+  			org.vaadin.johannesh.jfokus2012.domain.EMF
+  		</listener-class>
+  	</listener>
+  	<listener>
+  		<listener-class>
+  			org.vaadin.johannesh.jfokus2012.domain.UserDataGenerator
+  		</listener-class>
+  	</listener>
 	<servlet>
 		<servlet-name>Application</servlet-name>
 		<servlet-class>com.vaadin.addon.touchkit.server.TouchKitApplicationServlet</servlet-class>
@@ -23,16 +33,22 @@
 			<param-value>org.vaadin.johannesh.jfokus2012.touchkit.widgetset.AppWidgetset</param-value>
 		</init-param>
 	</servlet>
+	
+	<servlet>  
+	   <servlet-name>RestletServlet</servlet-name>  
+	   <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+	   <init-param>
+	         <!-- Application class name -->
+	         <param-name>org.restlet.application</param-name>
+	         <param-value>org.vaadin.johannesh.jfokus2012.rest.AddressbookRestApplication</param-value>
+	   </init-param>
+	</servlet>  	
 	<servlet-mapping>
 		<servlet-name>Application</servlet-name>
 		<url-pattern>/tk/*</url-pattern>
 	</servlet-mapping>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
 </web-app>

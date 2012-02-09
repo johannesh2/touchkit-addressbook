@@ -4,7 +4,11 @@
 	padding: 10px;
 }
 
+.contacts .v-table-row-odd {
+	background: white;
+}
 
-.v-table-body {
-	border-radius: 15px;
+
+.contacts .v-table-cell-content {
+	border-bottom: 1px solid #aaa;
 }

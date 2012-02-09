@@ -14,26 +14,29 @@
  * the License.
  */
 
-package org.vaadin.johannesh.jfokus2012.domain;
+package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import java.io.Serializable;
+import com.vaadin.addon.touchkit.ui.NavigationView;
+import com.vaadin.ui.Component;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
-@MappedSuperclass
-public class AbstractEntity implements Serializable {
+public class ShowContactView extends NavigationView {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	public Long getId() {
-		return id;
+	private Long personId;
+
+	public ShowContactView(String caption, Long personId) {
+		super(caption);
+		this.personId = personId;
 	}
 	
+	@Override
+	public void attach() {
+		super.attach();
+		buildLayout();
+	}
+	
+	private void buildLayout() {
+		App.getPersonsCachingContainer().getItem(personId);
+	}
+
 }

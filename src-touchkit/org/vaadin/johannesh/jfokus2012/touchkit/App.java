@@ -1,13 +1,29 @@
+/*
+ * Copyright 2012 Vaadin Ltd.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.vaadin.johannesh.jfokus2012.domain.Company;
+import org.vaadin.johannesh.jfokus2012.domain.EMF;
 import org.vaadin.johannesh.jfokus2012.domain.Person;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
-import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.addon.jpacontainer.provider.CachingLocalEntityProvider;
 import com.vaadin.addon.touchkit.ui.NavigationManager;
 import com.vaadin.addon.touchkit.ui.TouchKitApplication;
@@ -19,8 +35,6 @@ public class App extends TouchKitApplication {
 	private NavigationManager navigationManager;
 	private JPAContainer<Person> persons;
 	private JPAContainer<Company> companies;
-
-	public static final String PERSISTENCE_UNIT = "h2";
 
 	@Override
 	public void init() {
@@ -63,7 +77,7 @@ public class App extends TouchKitApplication {
 		App app = getApp();
 		if (app.persons == null) {
 			app.persons = new JPAContainer<Person>(Person.class);
-			app.persons.setEntityProvider(new CachingLocalEntityProvider<Person>(Person.class, JPAContainerFactory.createEntityManagerForPersistenceUnit(PERSISTENCE_UNIT)));
+			app.persons.setEntityProvider(new CachingLocalEntityProvider<Person>(Person.class, EMF.getEntityManagerFactory().createEntityManager()));
 		}
 		return app.persons;
 	}
@@ -72,7 +86,7 @@ public class App extends TouchKitApplication {
 		App app = getApp();
 		if (app.companies == null) {
 			app.companies = new JPAContainer<Company>(Company.class);
-			app.companies.setEntityProvider(new CachingLocalEntityProvider<Company>(Company.class, JPAContainerFactory.createEntityManagerForPersistenceUnit(PERSISTENCE_UNIT)));
+			app.companies.setEntityProvider(new CachingLocalEntityProvider<Company>(Company.class, EMF.getEntityManagerFactory().createEntityManager()));
 		}
 		return app.companies;
 	}
