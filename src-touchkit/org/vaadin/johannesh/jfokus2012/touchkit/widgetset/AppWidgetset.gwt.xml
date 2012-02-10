@@ -20,7 +20,4 @@
 
 
     <inherits name="com.vaadin.addon.touchkit.gwt.TouchKitWidgetSet" />
-    <generate-with class="org.vaadin.johannesh.jfokus2012.touchkit.widgetset.WidgetMapGenerator">
-    	<when-type-is class="com.vaadin.terminal.gwt.client.WidgetMap" />
-    </generate-with>
 </module>

@@ -1,5 +1,14 @@
 @import "../base/styles.css";
 
+/**** ListSelect ****/
+
+.v-touchkit-verticalcomponentgroup .v-select-select {
+	-webkit-appearance: none;
+	border: none;
+}
+
+/**** Table ****/
+
 .contacts .v-table-row-odd {
 	background: white;
 }
@@ -41,6 +50,8 @@
 	border-top-right-radius: 9px;
 	border: 1px solid #BBB;
 }
+
+/**** VerticalComponentGroup related ****/
 
 .v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-caption {
 	text-transform: lowercase;

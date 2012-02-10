@@ -19,34 +19,65 @@
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import com.vaadin.data.Property;
+import com.vaadin.terminal.PaintException;
+import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.TextField;
 
 /**
  * Server side component for the VTelField widget.
  */
-@com.vaadin.ui.ClientWidget(value = org.vaadin.johannesh.jfokus2012.touchkit.widgetset.client.ui.VTelField.class, loadStyle = LoadStyle.EAGER)
-public class TelField extends TextField {
+@com.vaadin.ui.ClientWidget(value = org.vaadin.johannesh.jfokus2012.touchkit.widgetset.client.ui.VHtml5InputField.class, loadStyle = LoadStyle.EAGER)
+public class Html5InputField extends TextField {
 
     private static final long serialVersionUID = 1L;
-
-    public TelField() {
+    
+    public enum InputType {
+    	Text("text"),
+    	Number("number"),
+    	Tel("tel"),
+    	Url("url"),
+    	Email("email");
+    	
+    	private InputType(String type) {
+    		this.type = type;
+    	}
+    	
+    	public final String type;
+    	
+    }
+    
+    private InputType inputType = InputType.Text;
+    
+    public Html5InputField() {
 
     }
 
-    public TelField(Property dataSource) {
+    public Html5InputField(Property dataSource) {
         super(dataSource);
     }
 
-    public TelField(String caption, Property dataSource) {
+    public Html5InputField(String caption, Property dataSource) {
         super(caption, dataSource);
     }
 
-    public TelField(String caption, String value) {
+    public Html5InputField(String caption, String value) {
         super(caption, value);
     }
 
-    public TelField(String caption) {
+    public Html5InputField(String caption) {
         super(caption);
+    }
+    
+    @Override
+    public void paintContent(PaintTarget target) throws PaintException {
+    	super.paintContent(target);
+    	
+    	target.addAttribute("html5-input-type", inputType.type);
+    }
+    
+    public void setInputType(InputType inputType) {
+    	this.inputType = inputType;
+    	requestRepaint();
     }
 }

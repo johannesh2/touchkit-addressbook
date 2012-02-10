@@ -16,14 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.vaadin.johannesh.jfokus2012.touchkit.widgetset.client.ui;
 
+
+import com.vaadin.terminal.gwt.client.ApplicationConnection;
+import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.VTextField;
 
-public class VTelField extends VTextField {
+/**
+ * Add support for url, email, phone and search HTML5 fields that at least new iOS supports
+ * @author johku
+ *
+ */
+public class VHtml5InputField extends VTextField {
 
-    public VTelField() {
-        getElement().setPropertyString("type", "tel");
+    public VHtml5InputField() {
+    }
+    
+    @Override
+    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
+    	super.updateFromUIDL(uidl, client);
+    	
+    	if (client.updateComponent(this, uidl, true)) {
+    		return;
+    	}
+    	
+    	if (uidl.hasAttribute("html5-input-type")) {
+    		getElement().setPropertyString("type", uidl.getStringAttribute("html5-input-type"));
+    	}
     }
 
 }

@@ -55,7 +55,7 @@ public class WidgetMapGenerator extends TouchKitWidgetMapGenerator {
         a.add(NavigationButton.class);
         a.add(NavigationManager.class);
         a.add(VerticalComponentGroup.class);
-        a.add(org.vaadin.johannesh.jfokus2012.touchkit.TelField.class);
+        a.add(org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField.class);
         a.add(NavigationView.class);
         a.add(NumberField.class);
         a.add(EmailField.class);

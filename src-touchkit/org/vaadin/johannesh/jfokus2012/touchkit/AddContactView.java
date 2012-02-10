@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 import org.vaadin.addon.formbinder.ViewBoundForm;
 import org.vaadin.johannesh.jfokus2012.domain.Person;
+import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField.InputType;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.touchkit.ui.EmailField;
@@ -29,10 +30,11 @@ import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.TextField;
 
 public class AddContactView extends NavigationView {
@@ -110,9 +112,9 @@ public class AddContactView extends NavigationView {
         private static final long serialVersionUID = 1L;
         private TextField firstNameField;
         private TextField lastNameField;
-        private ComboBox companyField;
-        private TextField mobileField;
-        private EmailField emailField;
+        private AbstractSelect companyField;
+        private Html5InputField mobileField;
+        private Html5InputField emailField;
         private Switch favouriteField;
 
         public ContactEntityView() {
@@ -125,17 +127,24 @@ public class AddContactView extends NavigationView {
             lastNameField = new TextField(tr.getString("lastName"));
             lastNameField.setWidth("100%");
             lastNameField.setNullRepresentation("");
-            companyField = new ComboBox(tr.getString("company"));
+            companyField = new ListSelect(tr.getString("company"));
             companyField.setContainerDataSource(App.getCompaniesContainer());
             companyField.setWidth("100%");
             companyField.setNullSelectionAllowed(true);
+            companyField.setNullSelectionItemId("null-selection");
+            companyField.setItemCaption("null-selection", tr.getString("noCompany"));
+            companyField.setContainerDataSource(App.getCompaniesContainer());
 
-            mobileField = new TelField(tr.getString("mobile"));
+            mobileField = new Html5InputField(tr.getString("mobile"));
+            mobileField.setInputType(InputType.Tel);
             mobileField.setWidth("100%");
             mobileField.setNullRepresentation("");
-            emailField = new EmailField(tr.getString("email"));
+            
+            emailField = new Html5InputField(tr.getString("email"));
+            emailField.setInputType(InputType.Email);
             emailField.setWidth("100%");
             emailField.setNullRepresentation("");
+            
             favouriteField = new Switch(tr.getString("favourite"), false);
 
             VerticalComponentGroup group = new VerticalComponentGroup("");
