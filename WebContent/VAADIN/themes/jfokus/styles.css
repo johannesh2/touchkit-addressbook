@@ -5,6 +5,7 @@
 .v-touchkit-verticalcomponentgroup .v-select-select {
 	-webkit-appearance: none;
 	border: none;
+	height: 1.5em;
 }
 
 /**** Table ****/

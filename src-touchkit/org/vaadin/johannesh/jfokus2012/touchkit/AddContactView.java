@@ -25,7 +25,6 @@ import org.vaadin.johannesh.jfokus2012.domain.Person;
 import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField.InputType;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
-import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
@@ -40,13 +39,6 @@ import com.vaadin.ui.TextField;
 public class AddContactView extends NavigationView {
 
     private static final long serialVersionUID = 1L;
-
-    // private static final String FIRST_NAME = "firstName";
-    // private static final String LAST_NAME = "lastName";
-    // private static final String EMAIL = "email";
-    // private static final String MOBILE = "mobile";
-    // private static final String PICTURE_URI = "pictureUri";
-    // private static final String IS_FAVOURITE = "favourite";
 
     CssLayout content;
     ViewBoundForm form;
@@ -92,13 +84,15 @@ public class AddContactView extends NavigationView {
         });
 
         form = new ViewBoundForm(new ContactEntityView());
-        form.setSizeFull();
+        form.getLayout().setWidth("100%");
+        form.setSizeUndefined();
+        form.setWidth("100%");
 
         getNavigationBar().setLeftComponent(undoButton);
         getNavigationBar().setRightComponent(readyButton);
 
         content = new CssLayout();
-        content.setWidth("100%");
+        content.setSizeUndefined();
         item = new BeanItem<Person>(new Person());
 
         form.setItemDataSource(item);
@@ -119,7 +113,6 @@ public class AddContactView extends NavigationView {
 
         public ContactEntityView() {
 
-            setSizeFull();
             ResourceBundle tr = App.getTr(App.getApp().getLocale());
             firstNameField = new TextField(tr.getString("firstName"));
             firstNameField.setWidth("100%");
@@ -128,12 +121,13 @@ public class AddContactView extends NavigationView {
             lastNameField.setWidth("100%");
             lastNameField.setNullRepresentation("");
             companyField = new ListSelect(tr.getString("company"));
-            companyField.setContainerDataSource(App.getCompaniesContainer());
             companyField.setWidth("100%");
-            companyField.setNullSelectionAllowed(true);
-            companyField.setNullSelectionItemId("null-selection");
-            companyField.setItemCaption("null-selection", tr.getString("noCompany"));
+            companyField.setItemCaptionMode(AbstractSelect.ITEM_CAPTION_MODE_PROPERTY);
             companyField.setContainerDataSource(App.getCompaniesContainer());
+//            companyField.setNullSelectionAllowed(true);
+//            companyField.setNullSelectionItemId("null-selection");
+//            companyField.setItemCaption("null-selection", tr.getString("noCompany"));
+            companyField.setItemCaptionPropertyId("name");
 
             mobileField = new Html5InputField(tr.getString("mobile"));
             mobileField.setInputType(InputType.Tel);

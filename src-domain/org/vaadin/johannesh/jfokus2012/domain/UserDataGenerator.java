@@ -1,5 +1,8 @@
 package org.vaadin.johannesh.jfokus2012.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -22,6 +25,48 @@ public class UserDataGenerator implements ServletContextListener {
 			user.setIdentifier("user");
 			user.setSecret("password".toCharArray());
 			em.persist(user);
+			
+			Company vaadin = new Company();
+			vaadin.setName("Vaadin");
+			em.persist(vaadin);
+			
+			List<Person> persons = new ArrayList<Person>();
+			Person p = new Person();
+			p.setCompany(vaadin);
+			p.setEmail("joonas@vaadin.com");
+			p.setFirstName("Joonas");
+			p.setLastName("Lehtinen");
+			p.setFavourite(true);
+			persons.add(p);
+			
+			p = new Person();
+			p.setCompany(vaadin);
+			p.setEmail("fredu@vaadin.com");
+			p.setFirstName("Fredrik");
+			p.setLastName("Ršnnlund");
+			persons.add(p);
+			
+			p = new Person();
+			p.setCompany(vaadin);
+			p.setEmail("ville@vaadin.com");
+			p.setFirstName("Ville");
+			p.setLastName("Ingman");
+			persons.add(p);
+			
+			p = new Person();
+			p.setCompany(vaadin);
+			p.setEmail("jani@vaadin.com");
+			p.setFirstName("Jani");
+			p.setLastName("Laakso");
+			persons.add(p);
+			
+			for (Person person : persons) {
+				em.persist(person);
+			}
+			
+			vaadin.getPersons().addAll(persons);
+			em.merge(vaadin);
+			
 			em.getTransaction().commit();
 		} catch (NonUniqueResultException e) {
 			e.printStackTrace();

@@ -18,6 +18,7 @@
 
 package org.vaadin.johannesh.jfokus2012.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -44,5 +45,5 @@ public class Company extends AbstractEntity {
     private String name;
 
     @OneToMany(mappedBy = "company")
-    private Set<Person> persons;
+    private Set<Person> persons = new HashSet<Person>();
 }
