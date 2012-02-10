@@ -18,25 +18,19 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import java.util.ResourceBundle;
-
-import org.eclipse.persistence.internal.sessions.remote.SequencingFunctionCall.GetNextValue;
-
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 
-public class ListGroupsView extends NavigationView  {
+public class ListGroupsView extends NavigationView {
 
     private static final long serialVersionUID = 1L;
 
     private CssLayout layout;
-
-    private ResourceBundle tr;
 
     public ListGroupsView(String caption) {
         super(caption);
@@ -46,24 +40,21 @@ public class ListGroupsView extends NavigationView  {
     public void attach() {
         super.attach();
 
-        tr = App.getTr(getLocale());
-
         layout = new CssLayout();
         layout.setWidth("100%");
         setContent(layout);
-        
-        Button refreshButton = new Button(tr.getString("refresh"),
-                leftComponentClickListener);
+
+        Button refreshButton = new Button("refresh", leftComponentClickListener);
         setLeftComponent(refreshButton);
-        
+
         buildGroups();
     }
 
     private void buildGroups() {
         VerticalComponentGroup allGroup = new VerticalComponentGroup();
-        NavigationButton allGroupButton = new NavigationButton(
-                tr.getString("group.all"), getNavigationManager().getNextComponent());
-//        allGroupButton.addListener(allGroupsClickListener);
+        NavigationButton allGroupButton = new NavigationButton("All contacts",
+                getNavigationManager().getNextComponent());
+        // allGroupButton.addListener(allGroupsClickListener);
         allGroup.addComponent(allGroupButton);
         layout.addComponentAsFirst(allGroup);
     }
@@ -80,12 +71,13 @@ public class ListGroupsView extends NavigationView  {
 
     private final ClickListener leftComponentClickListener = new ClickListener() {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@Override
+        @Override
         public void buttonClick(ClickEvent event) {
-			App.getPersonsContainer().refresh();
-			App.getCompaniesContainer().refresh();
+            App.getPersonsContainer().refresh();
+            App.getCompaniesContainer().refresh();
         }
+
     };
 }

@@ -19,7 +19,6 @@
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import org.vaadin.johannesh.jfokus2012.domain.Company;
 import org.vaadin.johannesh.jfokus2012.domain.EMF;
@@ -57,10 +56,8 @@ public class App extends TouchKitApplication {
 
     @Override
     public void onBrowserDetailsReady() {
-        ListContactsView listView = new ListContactsView(getTr(getLocale())
-                .getString("listContactsView"));
-        ListGroupsView listGroups = new ListGroupsView(getTr(getLocale())
-                .getString("listGroupsView"));
+        ListContactsView listView = new ListContactsView("All Contacts");
+        ListGroupsView listGroups = new ListGroupsView("Groups");
         navigationManager = new NavigationManager();
         navigationManager.setCurrentComponent(listView);
         navigationManager.setPreviousComponent(listGroups);
@@ -69,13 +66,6 @@ public class App extends TouchKitApplication {
 
     public static App getApp() {
         return (App) get();
-    }
-
-    public static ResourceBundle getTr(Locale locale) {
-        if (locale == null) {
-            locale = Locale.ENGLISH;
-        }
-        return ResourceBundle.getBundle("CaptionsBundle", locale);
     }
 
     public static JPAContainer<Person> getPersonsContainer() {

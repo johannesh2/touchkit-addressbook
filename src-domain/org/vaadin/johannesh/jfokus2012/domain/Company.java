@@ -21,6 +21,7 @@ package org.vaadin.johannesh.jfokus2012.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -44,6 +45,6 @@ public class Company extends AbstractEntity {
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = { CascadeType.ALL })
     private Set<Person> persons = new HashSet<Person>();
 }

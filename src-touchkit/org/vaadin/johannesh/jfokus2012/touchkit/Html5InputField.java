@@ -31,24 +31,20 @@ import com.vaadin.ui.TextField;
 public class Html5InputField extends TextField {
 
     private static final long serialVersionUID = 1L;
-    
+
     public enum InputType {
-    	Text("text"),
-    	Number("number"),
-    	Tel("tel"),
-    	Url("url"),
-    	Email("email");
-    	
-    	private InputType(String type) {
-    		this.type = type;
-    	}
-    	
-    	public final String type;
-    	
+        Text("text"), Number("number"), Tel("tel"), Url("url"), Email("email");
+
+        private InputType(String type) {
+            this.type = type;
+        }
+
+        public final String type;
+
     }
-    
+
     private InputType inputType = InputType.Text;
-    
+
     public Html5InputField() {
 
     }
@@ -66,18 +62,23 @@ public class Html5InputField extends TextField {
     }
 
     public Html5InputField(String caption) {
-        super(caption);
+        this(caption, InputType.Text);
     }
-    
+
+    public Html5InputField(String caption, InputType type) {
+        super(caption);
+        this.inputType = type;
+    }
+
     @Override
     public void paintContent(PaintTarget target) throws PaintException {
-    	super.paintContent(target);
-    	
-    	target.addAttribute("html5-input-type", inputType.type);
+        super.paintContent(target);
+
+        target.addAttribute("html5-input-type", inputType.type);
     }
-    
+
     public void setInputType(InputType inputType) {
-    	this.inputType = inputType;
-    	requestRepaint();
+        this.inputType = inputType;
+        requestRepaint();
     }
 }

@@ -18,12 +18,8 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import java.util.ResourceBundle;
-
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationView;
-import com.vaadin.event.ItemClickEvent;
-import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -32,8 +28,10 @@ import com.vaadin.ui.Table;
 public class ListContactsView extends NavigationView {
 
     private static final long serialVersionUID = 1L;
-    private ResourceBundle tr;
     private static final String GENERATED_COLUMN_0 = "generatedCol0";
+    private Table table;
+
+    private AddEditContactView editView;
 
     public ListContactsView(String caption) {
         super(caption);
@@ -43,13 +41,14 @@ public class ListContactsView extends NavigationView {
     @Override
     public void attach() {
         super.attach();
-        tr = App.getTr(App.get().getLocale());
+        if (getContent() == table) {
+            return;
+        }
 
-        Button addButton = new Button(tr.getString("add"),
-                rightComponentClickListener);
+        Button addButton = new Button("add", rightComponentClickListener);
         setRightComponent(addButton);
 
-        final Table table = new Table("", App.getPersonsContainer());
+        table = new Table("", App.getPersonsContainer());
         table.addStyleName("contacts");
         table.setSizeFull();
         table.setColumnHeaderMode(Table.COLUMN_HEADER_MODE_HIDDEN);
@@ -59,30 +58,17 @@ public class ListContactsView extends NavigationView {
                     public Object generateCell(Table source, Object itemId,
                             Object columnId) {
                         if (GENERATED_COLUMN_0.equals(columnId)) {
-                            final Object first = source.getContainerProperty(
-                                    itemId, "firstName").getValue();
-                            final Object last = source.getContainerProperty(
-                                    itemId, "lastName").getValue();
-                            final String caption = String.format("%s %s",
-                                    first != null ? first : "",
-                                    last != null ? last : "").trim();
-                            return new NavigationButton(caption);
+                            NavigationButton button = new NavigationButton(
+                                    ContactUtils.formatCaption(source
+                                            .getItem(itemId)));
+                            button.setData(itemId);
+                            button.addListener(contactItemClickListener);
+                            return button;
                         }
                         return null;
                     }
                 });
         table.setVisibleColumns(new String[] { GENERATED_COLUMN_0 });
-        table.addListener(new ItemClickListener() {
-            @Override
-            public void itemClick(ItemClickEvent event) {
-                if (table.getValue() != null) {
-                    Long personId = (Long) table.getValue();
-                    getNavigationManager().navigateTo(
-                            new ShowContactView(
-                                    tr.getString("showContactView"), personId));
-                }
-            }
-        });
         setContent(table);
 
     }
@@ -93,8 +79,27 @@ public class ListContactsView extends NavigationView {
 
         @Override
         public void buttonClick(ClickEvent event) {
-            getNavigationManager().navigateTo(
-                    new AddContactView(tr.getString("addContactView")));
+            if (editView == null) {
+                editView = new AddEditContactView();
+            }
+            editView.setContactItem(null);
+            getNavigationManager().navigateTo(editView);
         }
+    };
+
+    private final ClickListener contactItemClickListener = new ClickListener() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void buttonClick(ClickEvent event) {
+            if (editView == null) {
+                editView = new AddEditContactView();
+            }
+            Object itemId = event.getButton().getData();
+            editView.setContactItem(App.getPersonsContainer().getItem(itemId));
+            getNavigationManager().navigateTo(editView);
+        }
+
     };
 }
