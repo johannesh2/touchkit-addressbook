@@ -18,51 +18,54 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import java.util.ResourceBundle;
-
 import org.vaadin.addon.formbinder.ViewBoundForm;
 import org.vaadin.johannesh.jfokus2012.domain.Person;
+import org.vaadin.johannesh.jfokus2012.touchkit.ContactUtils.ContactItemWrapper;
 import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField.InputType;
 
+import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Switch;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.TextField;
 
-public class AddContactView extends NavigationView {
+public class EditContactView extends NavigationView {
 
     private static final long serialVersionUID = 1L;
 
-    CssLayout content;
-    ViewBoundForm form;
-    VerticalComponentGroup group1;
-    VerticalComponentGroup group2;
-    VerticalComponentGroup group3;
-    VerticalComponentGroup group4;
-    BeanItem<Person> item;
-    ResourceBundle tr;
+    private CssLayout content;
+    private ViewBoundForm form;
+    private ContactItemWrapper<Person> editedItem;
 
-    public AddContactView(String caption) {
-        super(caption);
+    public EditContactView() {
     }
 
     @Override
     public void attach() {
         super.attach();
-        tr = App.getTr(App.get().getLocale());
         buildView();
+    }
+
+    public void setContactItem(EntityItem<Person> item) {
+        if (item == null) {
+            editedItem = new ContactItemWrapper<Person>(new BeanItem<Person>(
+                    new Person()));
+        } else {
+            editedItem = new ContactItemWrapper<Person>(item);
+        }
+        if (form != null) {
+            form.setItemDataSource(editedItem.asItem());
+        }
     }
 
     @SuppressWarnings("serial")
     private void buildView() {
-        Button undoButton = new Button(tr.getString("undo"));
+        Button undoButton = new Button("undo");
         undoButton.addListener(new Button.ClickListener() {
             @Override
             public void buttonClick(ClickEvent event) {
@@ -71,14 +74,14 @@ public class AddContactView extends NavigationView {
             }
         });
 
-        Button readyButton = new Button(tr.getString("ready"));
+        Button readyButton = new Button("ready");
         readyButton.addStyleName("blue");
         readyButton.addListener(new Button.ClickListener() {
             @Override
             public void buttonClick(ClickEvent event) {
                 form.commit();
                 JPAContainer<Person> persons = App.getPersonsContainer();
-                persons.addEntity(item.getBean());
+                persons.addEntity(editedItem.getEntity());
                 getNavigationManager().navigateBack();
             }
         });
@@ -93,9 +96,8 @@ public class AddContactView extends NavigationView {
 
         content = new CssLayout();
         content.setSizeUndefined();
-        item = new BeanItem<Person>(new Person());
 
-        form.setItemDataSource(item);
+        form.setItemDataSource(editedItem.asItem());
         content.addComponent(form);
 
         setContent(content);
@@ -106,40 +108,31 @@ public class AddContactView extends NavigationView {
         private static final long serialVersionUID = 1L;
         private TextField firstNameField;
         private TextField lastNameField;
-        private AbstractSelect companyField;
+        private CompanyField companyField;
         private Html5InputField mobileField;
         private Html5InputField emailField;
         private Switch favouriteField;
 
         public ContactEntityView() {
 
-            ResourceBundle tr = App.getTr(App.getApp().getLocale());
-            firstNameField = new TextField(tr.getString("firstName"));
+            firstNameField = new TextField("first");
             firstNameField.setWidth("100%");
             firstNameField.setNullRepresentation("");
-            lastNameField = new TextField(tr.getString("lastName"));
+            lastNameField = new TextField("last");
             lastNameField.setWidth("100%");
             lastNameField.setNullRepresentation("");
-            companyField = new ListSelect(tr.getString("company"));
+            companyField = new CompanyField("company");
             companyField.setWidth("100%");
-            companyField.setItemCaptionMode(AbstractSelect.ITEM_CAPTION_MODE_PROPERTY);
-            companyField.setContainerDataSource(App.getCompaniesContainer());
-//            companyField.setNullSelectionAllowed(true);
-//            companyField.setNullSelectionItemId("null-selection");
-//            companyField.setItemCaption("null-selection", tr.getString("noCompany"));
-            companyField.setItemCaptionPropertyId("name");
 
-            mobileField = new Html5InputField(tr.getString("mobile"));
-            mobileField.setInputType(InputType.Tel);
+            mobileField = new Html5InputField("mobile", InputType.Tel);
             mobileField.setWidth("100%");
             mobileField.setNullRepresentation("");
-            
-            emailField = new Html5InputField(tr.getString("email"));
-            emailField.setInputType(InputType.Email);
+
+            emailField = new Html5InputField("email", InputType.Email);
             emailField.setWidth("100%");
             emailField.setNullRepresentation("");
-            
-            favouriteField = new Switch(tr.getString("favourite"), false);
+
+            favouriteField = new Switch("favourite", false);
 
             VerticalComponentGroup group = new VerticalComponentGroup("");
             group.addComponent(firstNameField);
@@ -156,6 +149,6 @@ public class AddContactView extends NavigationView {
             group.addComponent(favouriteField);
             addComponent(group);
         }
-
     }
+
 }

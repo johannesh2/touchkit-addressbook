@@ -18,6 +18,9 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
+import org.vaadin.johannesh.jfokus2012.domain.Person;
+
+import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.Button;
@@ -31,7 +34,7 @@ public class ListContactsView extends NavigationView {
     private static final String GENERATED_COLUMN_0 = "generatedCol0";
     private Table table;
 
-    private AddEditContactView editView;
+    private EditContactView editView;
 
     public ListContactsView(String caption) {
         super(caption);
@@ -45,7 +48,7 @@ public class ListContactsView extends NavigationView {
             return;
         }
 
-        Button addButton = new Button("add", rightComponentClickListener);
+        Button addButton = new Button("add", contactItemClickListener);
         setRightComponent(addButton);
 
         table = new Table("", App.getPersonsContainer());
@@ -73,20 +76,6 @@ public class ListContactsView extends NavigationView {
 
     }
 
-    private final ClickListener rightComponentClickListener = new ClickListener() {
-
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public void buttonClick(ClickEvent event) {
-            if (editView == null) {
-                editView = new AddEditContactView();
-            }
-            editView.setContactItem(null);
-            getNavigationManager().navigateTo(editView);
-        }
-    };
-
     private final ClickListener contactItemClickListener = new ClickListener() {
 
         private static final long serialVersionUID = 1L;
@@ -94,10 +83,14 @@ public class ListContactsView extends NavigationView {
         @Override
         public void buttonClick(ClickEvent event) {
             if (editView == null) {
-                editView = new AddEditContactView();
+                editView = new EditContactView();
             }
             Object itemId = event.getButton().getData();
-            editView.setContactItem(App.getPersonsContainer().getItem(itemId));
+            EntityItem<Person> item = null;
+            if (itemId != null) {
+                item = App.getPersonsContainer().getItem(itemId);
+            }
+            editView.setContactItem(item);
             getNavigationManager().navigateTo(editView);
         }
 
