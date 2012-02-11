@@ -32,6 +32,7 @@ import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 
 public class App extends TouchKitApplication {
     private static final long serialVersionUID = 1L;
+    
     private TouchKitWindow mainWindow;
     private NavigationManager navigationManager;
     private JPAContainer<Person> persons;
@@ -47,8 +48,8 @@ public class App extends TouchKitApplication {
     private void configureMainWindow() {
         mainWindow = new TouchKitWindow();
         mainWindow.setCaption("JFokus 2012 - Addressbook Demo");
-        mainWindow.addApplicationIcon(getURL()
-                + "../VAADIN/themes/jfokus/icon/icon.png");
+        mainWindow.addApplicationIcon(57, 57, "/app/VAADIN/themes/jfokus/icon/icon.png", false);
+        mainWindow.addApplicationIcon(114, 114, "/app/VAADIN/themes/jfokus/icon/icon@2x.png", false);
         mainWindow.setWebAppCapable(true);
         mainWindow.setPersistentSessionCookie(true);
         setMainWindow(mainWindow);
@@ -56,8 +57,8 @@ public class App extends TouchKitApplication {
 
     @Override
     public void onBrowserDetailsReady() {
-        ListContactsView listView = new ListContactsView("All Contacts");
-        ListGroupsView listGroups = new ListGroupsView("Groups");
+        ListContactsView listView = new ListContactsView();
+        ListGroupsView listGroups = new ListGroupsView();
         navigationManager = new NavigationManager();
         navigationManager.setCurrentComponent(listView);
         navigationManager.setPreviousComponent(listGroups);

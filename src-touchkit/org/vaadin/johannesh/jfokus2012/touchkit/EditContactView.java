@@ -34,121 +34,123 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.TextField;
 
+@SuppressWarnings("serial")
 public class EditContactView extends NavigationView {
 
-    private static final long serialVersionUID = 1L;
+	public static final String DEFAULT_CAPTION = "Add a contact";
 
-    private CssLayout content;
-    private ViewBoundForm form;
-    private ContactItemWrapper<Person> editedItem;
+	private CssLayout content;
+	private ViewBoundForm form;
+	private final ContactItemWrapper<Person> editedItem;
 
-    public EditContactView() {
-    }
+	public EditContactView() {
+		this(null);
+	}
 
-    @Override
-    public void attach() {
-        super.attach();
-        buildView();
-    }
+	public EditContactView(EntityItem<Person> item) {
+		if (item == null) {
+			editedItem = new ContactItemWrapper<Person>(new BeanItem<Person>(
+					new Person()));
+		} else {
+			editedItem = new ContactItemWrapper<Person>(item);
+		}
+	}
 
-    public void setContactItem(EntityItem<Person> item) {
-        if (item == null) {
-            editedItem = new ContactItemWrapper<Person>(new BeanItem<Person>(
-                    new Person()));
-        } else {
-            editedItem = new ContactItemWrapper<Person>(item);
-        }
-        if (form != null) {
-            form.setItemDataSource(editedItem.asItem());
-        }
-    }
+	@Override
+	public void attach() {
+		super.attach();
+		buildView();
+		if (!(editedItem instanceof EntityItem)) {
+			setCaption(DEFAULT_CAPTION);
+		}
+	}
 
-    @SuppressWarnings("serial")
-    private void buildView() {
-        Button undoButton = new Button("undo");
-        undoButton.addListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(ClickEvent event) {
-                form.discard();
-                getNavigationManager().navigateBack();
-            }
-        });
+	private void buildView() {
+		Button undoButton = new Button("Undo");
+		undoButton.addListener(new Button.ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) {
+				form.discard();
+				getNavigationManager().navigateBack();
+			}
+		});
 
-        Button readyButton = new Button("ready");
-        readyButton.addStyleName("blue");
-        readyButton.addListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(ClickEvent event) {
-                form.commit();
-                JPAContainer<Person> persons = App.getPersonsContainer();
-                persons.addEntity(editedItem.getEntity());
-                getNavigationManager().navigateBack();
-            }
-        });
+		Button readyButton = new Button("Ready");
+		readyButton.addStyleName("blue");
+		readyButton.addListener(new Button.ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) {
+				form.commit();
+				JPAContainer<Person> persons = App.getPersonsContainer();
+				persons.addEntity(editedItem.getEntity());
+				getNavigationManager().navigateBack();
+			}
+		});
 
-        form = new ViewBoundForm(new ContactEntityView());
-        form.getLayout().setWidth("100%");
-        form.setSizeUndefined();
-        form.setWidth("100%");
+		form = new ViewBoundForm(new ContactEntityView());
+		form.getLayout().setWidth("100%");
+		form.setSizeUndefined();
+		form.setWidth("100%");
 
-        getNavigationBar().setLeftComponent(undoButton);
-        getNavigationBar().setRightComponent(readyButton);
+		getNavigationBar().setLeftComponent(undoButton);
+		getNavigationBar().setRightComponent(readyButton);
 
-        content = new CssLayout();
-        content.setSizeUndefined();
+		content = new CssLayout();
+		content.setSizeUndefined();
+		content.setWidth("100%");
 
-        form.setItemDataSource(editedItem.asItem());
-        content.addComponent(form);
+		form.setItemDataSource(editedItem.asItem());
+		content.addComponent(form);
 
-        setContent(content);
-    }
+		setContent(content);
+	}
 
-    static class ContactEntityView extends CssLayout {
+	static class ContactEntityView extends CssLayout {
 
-        private static final long serialVersionUID = 1L;
-        private TextField firstNameField;
-        private TextField lastNameField;
-        private CompanyField companyField;
-        private Html5InputField mobileField;
-        private Html5InputField emailField;
-        private Switch favouriteField;
+		private static final long serialVersionUID = 1L;
+		private TextField firstNameField;
+		private TextField lastNameField;
+		private CompanyField companyField;
+		private Html5InputField mobileField;
+		private Html5InputField emailField;
+		private Switch favouriteField;
 
-        public ContactEntityView() {
+		public ContactEntityView() {
 
-            firstNameField = new TextField("first");
-            firstNameField.setWidth("100%");
-            firstNameField.setNullRepresentation("");
-            lastNameField = new TextField("last");
-            lastNameField.setWidth("100%");
-            lastNameField.setNullRepresentation("");
-            companyField = new CompanyField("company");
-            companyField.setWidth("100%");
+			firstNameField = new TextField("first");
+			firstNameField.setWidth("100%");
+			firstNameField.setNullRepresentation("");
+			lastNameField = new TextField("last");
+			lastNameField.setWidth("100%");
+			lastNameField.setNullRepresentation("");
+			companyField = new CompanyField("company");
+			companyField.setWidth("100%");
 
-            mobileField = new Html5InputField("mobile", InputType.Tel);
-            mobileField.setWidth("100%");
-            mobileField.setNullRepresentation("");
+			mobileField = new Html5InputField("mobile", InputType.Tel);
+			mobileField.setWidth("100%");
+			mobileField.setNullRepresentation("");
 
-            emailField = new Html5InputField("email", InputType.Email);
-            emailField.setWidth("100%");
-            emailField.setNullRepresentation("");
+			emailField = new Html5InputField("email", InputType.Email);
+			emailField.setWidth("100%");
+			emailField.setNullRepresentation("");
 
-            favouriteField = new Switch("favourite", false);
+			favouriteField = new Switch("favourite", false);
 
-            VerticalComponentGroup group = new VerticalComponentGroup("");
-            group.addComponent(firstNameField);
-            group.addComponent(lastNameField);
-            group.addComponent(companyField);
-            addComponent(group);
-            group = new VerticalComponentGroup("");
-            group.addComponent(mobileField);
-            addComponent(group);
-            group = new VerticalComponentGroup("");
-            group.addComponent(emailField);
-            addComponent(group);
-            group = new VerticalComponentGroup("");
-            group.addComponent(favouriteField);
-            addComponent(group);
-        }
-    }
+			VerticalComponentGroup group = new VerticalComponentGroup("");
+			group.addComponent(firstNameField);
+			group.addComponent(lastNameField);
+			group.addComponent(companyField);
+			addComponent(group);
+			group = new VerticalComponentGroup("");
+			group.addComponent(mobileField);
+			addComponent(group);
+			group = new VerticalComponentGroup("");
+			group.addComponent(emailField);
+			addComponent(group);
+			group = new VerticalComponentGroup("");
+			group.addComponent(favouriteField);
+			addComponent(group);
+		}
+	}
 
 }

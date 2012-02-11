@@ -28,71 +28,72 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Table;
 
+@SuppressWarnings("serial")
 public class ListContactsView extends NavigationView {
 
-    private static final long serialVersionUID = 1L;
-    private static final String GENERATED_COLUMN_0 = "generatedCol0";
-    private Table table;
+	public static final String DEFAULT_CAPTION = "Contacts";
 
-    private EditContactView editView;
+	private static final String GENERATED_COLUMN_0 = "generatedCol0";
 
-    public ListContactsView(String caption) {
-        super(caption);
-    }
+	private Table table;
+	private Long groupId;
 
-    @SuppressWarnings("serial")
-    @Override
-    public void attach() {
-        super.attach();
-        if (getContent() == table) {
-            return;
-        }
+	public ListContactsView() {
+		this(null);
+	}
 
-        Button addButton = new Button("add", contactItemClickListener);
-        setRightComponent(addButton);
+	public ListContactsView(Long groupId) {
+		this.groupId = groupId;
+	}
 
-        table = new Table("", App.getPersonsContainer());
-        table.addStyleName("contacts");
-        table.setSizeFull();
-        table.setColumnHeaderMode(Table.COLUMN_HEADER_MODE_HIDDEN);
-        table.addGeneratedColumn(GENERATED_COLUMN_0,
-                new Table.ColumnGenerator() {
-                    @Override
-                    public Object generateCell(Table source, Object itemId,
-                            Object columnId) {
-                        if (GENERATED_COLUMN_0.equals(columnId)) {
-                            NavigationButton button = new NavigationButton(
-                                    ContactUtils.formatCaption(source
-                                            .getItem(itemId)));
-                            button.setData(itemId);
-                            button.addListener(contactItemClickListener);
-                            return button;
-                        }
-                        return null;
-                    }
-                });
-        table.setVisibleColumns(new String[] { GENERATED_COLUMN_0 });
-        setContent(table);
+	@Override
+	public void attach() {
+		super.attach();
+		if (getContent() == table) {
+			return;
+		}
 
-    }
+		if (groupId == null) {
+			setCaption(DEFAULT_CAPTION);
+		} else {
+			// Fetch by filter
+		}
 
-    private final ClickListener contactItemClickListener = new ClickListener() {
+		Button addButton = new Button("Add", addButtonClickListener);
+		setRightComponent(addButton);
 
-        private static final long serialVersionUID = 1L;
+		table = new Table("", App.getPersonsContainer());
+		table.addStyleName("contacts");
+		table.setSizeFull();
+		table.setColumnHeaderMode(Table.COLUMN_HEADER_MODE_HIDDEN);
+		table.addGeneratedColumn(GENERATED_COLUMN_0,
+				new Table.ColumnGenerator() {
+					@Override
+					public Object generateCell(Table source, Object itemId,
+							Object columnId) {
+						if (GENERATED_COLUMN_0.equals(columnId)) {
+							EntityItem<Person> item = null;
+							item = App.getPersonsContainer().getItem(itemId);
+							final String caption = ContactUtils
+									.formatName(item);
+							NavigationButton button = new NavigationButton(
+									caption, new ShowContactView(item));
+							return button;
+						}
+						return null;
+					}
+				});
+		table.setVisibleColumns(new String[] { GENERATED_COLUMN_0 });
+		setContent(table);
 
-        @Override
-        public void buttonClick(ClickEvent event) {
-            if (editView == null) {
-                editView = new EditContactView();
-            }
-            Object itemId = event.getButton().getData();
-            EntityItem<Person> item = null;
-            if (itemId != null) {
-                item = App.getPersonsContainer().getItem(itemId);
-            }
-            editView.setContactItem(item);
-            getNavigationManager().navigateTo(editView);
-        }
+	}
 
-    };
+	private final ClickListener addButtonClickListener = new ClickListener() {
+
+		@Override
+		public void buttonClick(ClickEvent event) {
+			getNavigationManager().navigateTo(new EditContactView());
+		}
+
+	};
 }

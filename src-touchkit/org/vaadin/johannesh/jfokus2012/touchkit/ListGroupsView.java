@@ -26,58 +26,51 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
 
+@SuppressWarnings("serial")
 public class ListGroupsView extends NavigationView {
 
-    private static final long serialVersionUID = 1L;
+	public static final String DEFAULT_CAPTION = "Groups";
 
-    private CssLayout layout;
+	private CssLayout layout;
 
-    public ListGroupsView(String caption) {
-        super(caption);
-    }
+	public ListGroupsView() {
+	}
 
-    @Override
-    public void attach() {
-        super.attach();
+	@Override
+	public void attach() {
+		super.attach();
+		if (getContent() == layout) {
+			return;
+		}
 
-        layout = new CssLayout();
-        layout.setWidth("100%");
-        setContent(layout);
+		layout = new CssLayout();
+		layout.setWidth("100%");
+		setContent(layout);
 
-        Button refreshButton = new Button("refresh", leftComponentClickListener);
-        setLeftComponent(refreshButton);
+		Button refreshButton = new Button("Refresh", leftComponentClickListener);
+		setCaption(DEFAULT_CAPTION);
+		setLeftComponent(refreshButton);
 
-        buildGroups();
-    }
+		buildGroups();
+	}
 
-    private void buildGroups() {
-        VerticalComponentGroup allGroup = new VerticalComponentGroup();
-        NavigationButton allGroupButton = new NavigationButton("All contacts",
-                getNavigationManager().getNextComponent());
-        // allGroupButton.addListener(allGroupsClickListener);
-        allGroup.addComponent(allGroupButton);
-        layout.addComponentAsFirst(allGroup);
-    }
+	private void buildGroups() {
+		VerticalComponentGroup allGroup = new VerticalComponentGroup();
+		NavigationButton allGroupButton = new NavigationButton(
+				ListContactsView.DEFAULT_CAPTION, new ListContactsView());
+		allGroup.addComponent(allGroupButton);
+		layout.addComponentAsFirst(allGroup);
+	}
 
-    private final ClickListener allGroupsClickListener = new ClickListener() {
-        private static final long serialVersionUID = 1L;
+	private final ClickListener leftComponentClickListener = new ClickListener() {
 
-        @Override
-        public void buttonClick(ClickEvent event) {
-            getNavigationManager().navigateTo(
-                    getNavigationManager().getNextComponent());
-        }
-    };
+		private static final long serialVersionUID = 1L;
 
-    private final ClickListener leftComponentClickListener = new ClickListener() {
+		@Override
+		public void buttonClick(ClickEvent event) {
+			App.getPersonsContainer().refresh();
+			App.getCompaniesContainer().refresh();
+		}
 
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public void buttonClick(ClickEvent event) {
-            App.getPersonsContainer().refresh();
-            App.getCompaniesContainer().refresh();
-        }
-
-    };
+	};
 }

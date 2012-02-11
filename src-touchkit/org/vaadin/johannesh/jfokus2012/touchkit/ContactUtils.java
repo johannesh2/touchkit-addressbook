@@ -6,9 +6,9 @@ import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 
-public class ContactUtils {
+final class ContactUtils {
 
-    static String formatCaption(Item item) {
+    static String formatName(Item item) {
         return String.format("%s %s",
                 item.getItemProperty("firstName").toString(),
                 item.getItemProperty("lastName")).trim();
@@ -21,8 +21,9 @@ public class ContactUtils {
         }
         return split[0];
     }
-
+    
     public static final String PROPERTY_FULLNAME = "fullName";
+    public static final String PROPERTY_COMPANY = "company";
     public static final String PROPERTY_FIRST_NAME = "firstName";
     public static final String PROPERTY_LAST_NAME = "lastName";
     public static final String PROPERTY_MOBILE = "mobile";
