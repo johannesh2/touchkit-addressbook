@@ -44,7 +44,7 @@ public class UserDataGenerator implements ServletContextListener {
             p.setCompany(vaadin);
             p.setEmail("fredu@vaadin.com");
             p.setFirstName("Fredrik");
-            p.setLastName("Rönnlund");
+            p.setLastName("RÃ¶nnlund");
             persons.add(p);
 
             p = new Person();
