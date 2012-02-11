@@ -1,5 +1,31 @@
 @import "../base/styles.css";
 
+.favourite-off input + img {
+	opacity: 0.1;
+}
+
+input[type = "checkbox"] {
+	display: none;	
+}
+
+.favourite-on input + img {
+	opacity: 1;
+}
+
+/**** captions in grid-layout ****/
+
+.strong-name {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.v-gridlayout-margin .v-caption {
+	display: none;
+}
+
+/**** Navigation ****/
+
+
 /**** ListSelect ****/
 
 .v-touchkit-verticalcomponentgroup .v-select-select {
@@ -52,7 +78,7 @@
 	border: 1px solid #BBB;
 }
 
-/**** VerticalComponentGroup related ****/
+/**** VerticalComponentGroup ****/
 
 .v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-caption {
 	text-transform: lowercase;
