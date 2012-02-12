@@ -20,7 +20,7 @@ package org.vaadin.johannesh.jfokus2012.touchkit.view;
 
 import org.vaadin.johannesh.jfokus2012.entity.Person;
 import org.vaadin.johannesh.jfokus2012.touchkit.App;
-import org.vaadin.johannesh.jfokus2012.touchkit.ContactUtils;
+import org.vaadin.johannesh.jfokus2012.touchkit.helpers.ContactUtils;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.touchkit.ui.NavigationButton;

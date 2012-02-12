@@ -1,7 +1,11 @@
-package org.vaadin.johannesh.jfokus2012.touchkit;
+package org.vaadin.johannesh.jfokus2012.touchkit.helpers;
 
+
+import org.vaadin.johannesh.jfokus2012.entity.Company;
 
 import com.vaadin.data.Item;
+import com.vaadin.data.Property;
+import com.vaadin.data.util.PropertyFormatter;
 
 public final class ContactUtils {
 
@@ -34,4 +38,24 @@ public final class ContactUtils {
     public static final String[] VISIBLE_CONTACT_PROPERTIES = new String[] {
             PROPERTY_FIRST_NAME, PROPERTY_LAST_NAME, PROPERTY_MOBILE,
             PROPERTY_EMAIL, PROPERTY_FAVOURITE };
+    
+	public static class CompanyPropertyFormatter extends PropertyFormatter {
+
+		public CompanyPropertyFormatter(Property propertyDataSource) {
+			super(propertyDataSource);
+		}
+
+		@Override
+		public String format(Object value) {
+			if (value instanceof Company) {
+				return ((Company) value).getName();
+			}
+			return value.toString();
+		}
+
+		@Override
+		public Object parse(String formattedValue) throws Exception {
+			throw new IllegalArgumentException("Not Supported");
+		}
+	}
 }

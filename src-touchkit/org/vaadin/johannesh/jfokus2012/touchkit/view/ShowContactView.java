@@ -20,8 +20,8 @@ package org.vaadin.johannesh.jfokus2012.touchkit.view;
 
 import org.vaadin.johannesh.jfokus2012.entity.Company;
 import org.vaadin.johannesh.jfokus2012.entity.Person;
-import org.vaadin.johannesh.jfokus2012.touchkit.ContactUtils;
 import org.vaadin.johannesh.jfokus2012.touchkit.Favourite;
+import org.vaadin.johannesh.jfokus2012.touchkit.helpers.ContactUtils;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -68,7 +68,7 @@ public class ShowContactView extends NavigationView {
 		Property p;
 
 		p = item.getItemProperty(ContactUtils.PROPERTY_COMPANY);
-		label = new Label(new CompanyPropertyFormatter(p));
+		label = new Label(new ContactUtils.CompanyPropertyFormatter(p));
 		label.setCaption(ContactUtils
 				.formatFieldCaption(ContactUtils.PROPERTY_COMPANY));
 		infoGroup.addComponent(label);
@@ -129,25 +129,5 @@ public class ShowContactView extends NavigationView {
 		});
 		setRightComponent(editButton);
 		setContent(layout);
-	}
-
-	private static class CompanyPropertyFormatter extends PropertyFormatter {
-
-		public CompanyPropertyFormatter(Property propertyDataSource) {
-			super(propertyDataSource);
-		}
-
-		@Override
-		public String format(Object value) {
-			if (value instanceof Company) {
-				return ((Company) value).getName();
-			}
-			return value.toString();
-		}
-
-		@Override
-		public Object parse(String formattedValue) throws Exception {
-			throw new IllegalArgumentException("Not Supported");
-		}
 	}
 }

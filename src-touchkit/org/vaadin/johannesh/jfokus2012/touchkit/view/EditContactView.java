@@ -22,9 +22,9 @@ import org.vaadin.addon.formbinder.ViewBoundForm;
 import org.vaadin.johannesh.jfokus2012.entity.ContactItemWrapper;
 import org.vaadin.johannesh.jfokus2012.entity.Person;
 import org.vaadin.johannesh.jfokus2012.touchkit.App;
-import org.vaadin.johannesh.jfokus2012.touchkit.CompanyField;
 import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField;
 import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField.InputType;
+import org.vaadin.johannesh.jfokus2012.touchkit.helpers.CompanyField;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.jpacontainer.JPAContainer;
