@@ -73,6 +73,7 @@ public class App extends TouchKitApplication {
         if (app.persons == null) {
             app.persons = JPAContainerFactory.make(Person.class, EMF
                     .getEntityManagerFactory().createEntityManager());
+            app.persons.addNestedContainerProperty("company.name");
         }
         return app.persons;
     }

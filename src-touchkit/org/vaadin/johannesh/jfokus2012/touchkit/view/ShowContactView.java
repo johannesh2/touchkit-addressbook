@@ -18,7 +18,6 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit.view;
 
-import org.vaadin.johannesh.jfokus2012.entity.Company;
 import org.vaadin.johannesh.jfokus2012.entity.Person;
 import org.vaadin.johannesh.jfokus2012.touchkit.Favourite;
 import org.vaadin.johannesh.jfokus2012.touchkit.helpers.ContactUtils;
@@ -27,7 +26,6 @@ import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Property;
-import com.vaadin.data.util.PropertyFormatter;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;

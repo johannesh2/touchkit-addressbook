@@ -38,59 +38,30 @@ input[type = "checkbox"] {
 
 /**** Table ****/
 
+.contacts .v-table-row-odd, .contacts .v-table-row {
+	height: 45px;
+	line-height: 45px;	
+}
+
+.contacts .v-table-row-odd:active, .contacts .v-table-row:active {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4D8CB9), to(#3E6FA8));
+	color: white;
+	text-shadow: 0 1px 1px #396897
+}
+
 .contacts .v-table-row-odd {
 	background: white;
 }
 
-
-.v-table .v-touchkit-navbutton {
-	border: 1px solid #BBB;
-	background: white;
-	padding: 0 10px;
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.5);
-	overflow: hidden;
-	border-top: none; 
-}
-
-.v-table .v-touchkit-navbutton:active {
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4D8CB9), to(#3E6FA8));
-	color: white;
-	text-shadow: 0 1px 1px #396897;	
-}
-
-.v-table-cell-content > .v-table-cell-wrapper {
-	padding: 0;
-}
-
-.companies .v-table-cell-content > .v-table-cell-wrapper {
-	height: 40px;
-	line-height: 40px;
-	color: #4E64A1;
-	font-weight: bold;
+.contacts .v-table-cell-content {
+	border-right: none;
+	border-bottom: 1px solid #9F9F9F;
+	color: #000;
 	font-size: 17px;
-}
-
-.v-table-table > tbody > tr:first-child .v-table-cell-wrapper {
-	padding-top: 5px;
-}
-
-.v-table-table > tbody > tr:last-child .v-table-cell-wrapper {
-	padding-bottom: 5px;
+	text-shadow: 0 1px 1px #eff;
 }
 
 
-.v-table-table > tbody > tr:last-child .v-touchkit-navbutton {
-	border-bottom-left-radius: 9px;
-	border-bottom-right-radius: 9px;
-	border: 1px solid #BBB;
-	border-top: none;
-}
-
-.v-table-table > tbody > tr:first-child .v-touchkit-navbutton {
-	border-top-left-radius: 9px;
-	border-top-right-radius: 9px;
-	border: 1px solid #BBB;
-}
 
 /**** VerticalComponentGroup ****/
 .select-company-view {

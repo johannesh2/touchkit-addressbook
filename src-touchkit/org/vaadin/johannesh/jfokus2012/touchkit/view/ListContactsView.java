@@ -20,11 +20,11 @@ package org.vaadin.johannesh.jfokus2012.touchkit.view;
 
 import org.vaadin.johannesh.jfokus2012.entity.Person;
 import org.vaadin.johannesh.jfokus2012.touchkit.App;
-import org.vaadin.johannesh.jfokus2012.touchkit.helpers.ContactUtils;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
-import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationView;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -34,8 +34,6 @@ import com.vaadin.ui.Table;
 public class ListContactsView extends NavigationView {
 
 	public static final String DEFAULT_CAPTION = "Contacts";
-
-	private static final String GENERATED_COLUMN_0 = "generatedCol0";
 
 	private Table table;
 	private Long groupId;
@@ -64,28 +62,21 @@ public class ListContactsView extends NavigationView {
 		Button addButton = new Button("Add", addButtonClickListener);
 		setRightComponent(addButton);
 
+		App.getPersonsContainer().addNestedContainerProperty("company.name");
 		table = new Table("", App.getPersonsContainer());
 		table.addStyleName("contacts");
 		table.setSizeFull();
 		table.setColumnHeaderMode(Table.COLUMN_HEADER_MODE_HIDDEN);
-		table.addGeneratedColumn(GENERATED_COLUMN_0,
-				new Table.ColumnGenerator() {
-					@Override
-					public Object generateCell(Table source, Object itemId,
-							Object columnId) {
-						if (GENERATED_COLUMN_0.equals(columnId)) {
-							EntityItem<Person> item = null;
-							item = App.getPersonsContainer().getItem(itemId);
-							final String caption = ContactUtils
-									.formatName(item);
-							NavigationButton button = new NavigationButton(
-									caption, new ShowContactView(item));
-							return button;
-						}
-						return null;
-					}
-				});
-		table.setVisibleColumns(new String[] { GENERATED_COLUMN_0 });
+
+		table.addListener(new ItemClickListener() {
+			@Override
+			public void itemClick(ItemClickEvent event) {
+				getNavigationManager().navigateTo(new ShowContactView((EntityItem<Person>) event.getItem()));
+			}
+		});
+		table.setVisibleColumns(new Object[] { "firstName", "lastName", "company.name" } );
+		table.setColumnExpandRatio("company.name", 1.0f);
+		table.setColumnAlignment("company.name", Table.ALIGN_RIGHT);
 		setContent(table);
 
 	}
