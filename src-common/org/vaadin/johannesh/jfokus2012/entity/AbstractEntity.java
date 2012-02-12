@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.vaadin.johannesh.jfokus2012.domain;
+package org.vaadin.johannesh.jfokus2012.entity;
 
 import java.io.Serializable;
 

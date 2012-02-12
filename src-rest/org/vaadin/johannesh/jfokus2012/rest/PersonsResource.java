@@ -10,8 +10,8 @@ import org.restlet.data.Status;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
-import org.vaadin.johannesh.jfokus2012.domain.EMF;
-import org.vaadin.johannesh.jfokus2012.domain.Person;
+import org.vaadin.johannesh.jfokus2012.EMF;
+import org.vaadin.johannesh.jfokus2012.entity.Person;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;

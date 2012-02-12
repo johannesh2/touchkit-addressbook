@@ -1,4 +1,4 @@
-package org.vaadin.johannesh.jfokus2012.domain;
+package org.vaadin.johannesh.jfokus2012.entity;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;

@@ -23,7 +23,7 @@ import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.VTextField;
 
 /**
- * Add support for url, email, phone and search HTML5 fields that at least new iOS supports
+ * Add support for url, email, phone and search HTML5 fields
  * @author johku
  *
  */

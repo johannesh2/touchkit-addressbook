@@ -1,4 +1,4 @@
-package org.vaadin.johannesh.jfokus2012.domain;
+package org.vaadin.johannesh.jfokus2012;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.vaadin.johannesh.jfokus2012.touchkit;
+package org.vaadin.johannesh.jfokus2012.touchkit.view;
+
+import org.vaadin.johannesh.jfokus2012.touchkit.App;
 
 import com.vaadin.addon.touchkit.ui.NavigationButton;
 import com.vaadin.addon.touchkit.ui.NavigationView;

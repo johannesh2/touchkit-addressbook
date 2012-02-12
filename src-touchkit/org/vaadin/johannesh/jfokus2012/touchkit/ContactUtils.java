@@ -1,14 +1,11 @@
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import org.vaadin.johannesh.jfokus2012.domain.AbstractEntity;
 
-import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.data.Item;
-import com.vaadin.data.util.BeanItem;
 
-final class ContactUtils {
+public final class ContactUtils {
 
-    static String formatName(Item item) {
+    public static String formatName(Item item) {
     	Object first = item.getItemProperty(PROPERTY_FIRST_NAME).getValue();
     	Object last = item.getItemProperty(PROPERTY_LAST_NAME).getValue();
         return String.format("%s %s",
@@ -16,7 +13,7 @@ final class ContactUtils {
                 last != null ? last : "").trim();
     }
 
-    static String formatFieldCaption(Object propertyId) {
+    public static String formatFieldCaption(Object propertyId) {
         String[] split = propertyId.toString().split("[A-Z]");
         if (split == null) {
             return propertyId.toString();
@@ -37,37 +34,4 @@ final class ContactUtils {
     public static final String[] VISIBLE_CONTACT_PROPERTIES = new String[] {
             PROPERTY_FIRST_NAME, PROPERTY_LAST_NAME, PROPERTY_MOBILE,
             PROPERTY_EMAIL, PROPERTY_FAVOURITE };
-
-    static class ContactItemWrapper<T extends AbstractEntity> {
-
-        private final EntityItem<T> entityItem;
-        private final BeanItem<T> beanItem;
-
-        public ContactItemWrapper(EntityItem<T> entityItem) {
-            this.entityItem = entityItem;
-            this.beanItem = null;
-        }
-
-        public ContactItemWrapper(BeanItem<T> beanItem) {
-            this.entityItem = null;
-            this.beanItem = beanItem;
-        }
-
-        EntityItem<T> asEntityItem() {
-            return entityItem;
-        }
-
-        BeanItem<T> asBeanItem() {
-            return beanItem;
-        }
-
-        T getEntity() {
-            return (entityItem == null) ? beanItem.getBean() : entityItem
-                    .getEntity();
-        }
-
-        Item asItem() {
-            return (entityItem == null) ? beanItem : entityItem;
-        }
-    }
 }

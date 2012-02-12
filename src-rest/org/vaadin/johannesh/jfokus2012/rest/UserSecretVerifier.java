@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.restlet.security.SecretVerifier;
-import org.vaadin.johannesh.jfokus2012.domain.EMF;
-import org.vaadin.johannesh.jfokus2012.domain.User;
+import org.vaadin.johannesh.jfokus2012.EMF;
+import org.vaadin.johannesh.jfokus2012.entity.User;
 
 public class UserSecretVerifier extends SecretVerifier {
 

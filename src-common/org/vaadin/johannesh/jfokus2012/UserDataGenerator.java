@@ -1,4 +1,4 @@
-package org.vaadin.johannesh.jfokus2012.domain;
+package org.vaadin.johannesh.jfokus2012;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,10 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import org.vaadin.johannesh.jfokus2012.entity.Company;
+import org.vaadin.johannesh.jfokus2012.entity.Person;
+import org.vaadin.johannesh.jfokus2012.entity.User;
 
 public class UserDataGenerator implements ServletContextListener {
 

@@ -1,4 +1,4 @@
-package org.vaadin.johannesh.jfokus2012.touchkit;
+package org.vaadin.johannesh.jfokus2012;
 
 import java.io.IOException;
 import javax.servlet.Filter;

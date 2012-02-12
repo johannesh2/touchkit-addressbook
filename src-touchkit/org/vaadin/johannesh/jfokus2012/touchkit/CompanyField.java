@@ -1,7 +1,7 @@
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import org.vaadin.addon.customfield.CustomField;
-import org.vaadin.johannesh.jfokus2012.domain.Company;
+import org.vaadin.johannesh.jfokus2012.entity.Company;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.data.Property;

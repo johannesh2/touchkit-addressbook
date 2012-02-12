@@ -16,9 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.vaadin.johannesh.jfokus2012.touchkit;
+package org.vaadin.johannesh.jfokus2012.touchkit.view;
 
-import org.vaadin.johannesh.jfokus2012.domain.Person;
+import org.vaadin.johannesh.jfokus2012.entity.Person;
+import org.vaadin.johannesh.jfokus2012.touchkit.App;
+import org.vaadin.johannesh.jfokus2012.touchkit.ContactUtils;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.touchkit.ui.NavigationButton;

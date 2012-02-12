@@ -18,9 +18,11 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import org.vaadin.johannesh.jfokus2012.domain.Company;
-import org.vaadin.johannesh.jfokus2012.domain.EMF;
-import org.vaadin.johannesh.jfokus2012.domain.Person;
+import org.vaadin.johannesh.jfokus2012.EMF;
+import org.vaadin.johannesh.jfokus2012.entity.Company;
+import org.vaadin.johannesh.jfokus2012.entity.Person;
+import org.vaadin.johannesh.jfokus2012.touchkit.view.ListContactsView;
+import org.vaadin.johannesh.jfokus2012.touchkit.view.ListGroupsView;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;

@@ -16,11 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.vaadin.johannesh.jfokus2012.touchkit;
+package org.vaadin.johannesh.jfokus2012.touchkit.view;
 
 import org.vaadin.addon.formbinder.ViewBoundForm;
-import org.vaadin.johannesh.jfokus2012.domain.Person;
-import org.vaadin.johannesh.jfokus2012.touchkit.ContactUtils.ContactItemWrapper;
+import org.vaadin.johannesh.jfokus2012.entity.ContactItemWrapper;
+import org.vaadin.johannesh.jfokus2012.entity.Person;
+import org.vaadin.johannesh.jfokus2012.touchkit.App;
+import org.vaadin.johannesh.jfokus2012.touchkit.CompanyField;
+import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField;
 import org.vaadin.johannesh.jfokus2012.touchkit.Html5InputField.InputType;
 
 import com.vaadin.addon.jpacontainer.EntityItem;

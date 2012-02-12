@@ -12,7 +12,7 @@
 		</description>
 		<display-name>NoStoreFilter</display-name>
 		<filter-name>NoStoreFilter</filter-name>
-		<filter-class>org.vaadin.johannesh.jfokus2012.touchkit.NoStoreFilter</filter-class>
+		<filter-class>org.vaadin.johannesh.jfokus2012.NoStoreFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>NoStoreFilter</filter-name>
@@ -20,12 +20,12 @@
 	</filter-mapping>
 	<listener>
 		<listener-class>
-  			org.vaadin.johannesh.jfokus2012.domain.EMF
+  			org.vaadin.johannesh.jfokus2012.EMF
   		</listener-class>
   	</listener>
   	<listener>
   		<listener-class>
-  			org.vaadin.johannesh.jfokus2012.domain.UserDataGenerator
+  			org.vaadin.johannesh.jfokus2012.UserDataGenerator
   		</listener-class>
   	</listener>
 	<servlet>
