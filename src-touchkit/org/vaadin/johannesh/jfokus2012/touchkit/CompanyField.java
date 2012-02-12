@@ -43,6 +43,7 @@ public class CompanyField extends CustomField {
 
         CssLayout cssLayout = new CssLayout();
         cssLayout.addComponent(companySelect);
+        companySelect.setSizeFull();
         setCompositionRoot(cssLayout);
     }
 
@@ -59,13 +60,8 @@ public class CompanyField extends CustomField {
     }
 
     private void setCompany(Object newValue) {
-        if (newValue != null
-                && newValue.equals(companySelect.getNullSelectionItemId())) {
-            companySelect.setValue(null);
-        } else {
-            Company value = (Company) newValue;
-            companySelect.setValue(value != null ? value.getId() : null);
-        }
+        Company value = (Company) newValue;
+        companySelect.setValue(value != null ? value.getId() : null);
     }
 
     @Override

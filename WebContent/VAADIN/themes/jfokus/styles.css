@@ -27,11 +27,16 @@ input[type = "checkbox"] {
 
 
 /**** ListSelect ****/
-
 .v-touchkit-verticalcomponentgroup .v-select-select {
 	-webkit-appearance: none;
 	border: none;
-	height: 1.5em;
+	height: 30px;
+	font-size: 17px;
+	margin-left: 10px;
+}
+
+.v-select-select > option {
+	color: #4E64A1;	
 }
 
 /**** Table ****/
@@ -52,8 +57,22 @@ input[type = "checkbox"] {
 	border-top: none;
 }
 
-.v-table-cell-content >.v-table-cell-wrapper {
+.v-table .v-touchkit-navbutton:active {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4D8CB9), to(#3E6FA8));
+	color: white;
+	text-shadow: 0 1px 1px #396897;	
+}
+
+.v-table-cell-content > .v-table-cell-wrapper {
 	padding: 0;
+}
+
+.companies .v-table-cell-content > .v-table-cell-wrapper {
+	height: 40px;
+	line-height: 40px;
+	color: #4E64A1;
+	font-weight: bold;
+	font-size: 17px;
 }
 
 .v-table-table > tbody > tr:first-child .v-table-cell-wrapper {
@@ -79,6 +98,20 @@ input[type = "checkbox"] {
 }
 
 /**** VerticalComponentGroup ****/
+.select-company-view {
+	position: relative;
+}
+
+.add-company {
+	position: absolute;
+	left: 10px;
+	right: 70px;
+	top: 0;
+}
+
+.add-company-button {
+	padding: 2px;
+}
 
 .v-touchkit-verticalcomponentgroup > div > .v-csslayout-container > .v-caption {
 	text-transform: lowercase;

@@ -9,9 +9,11 @@ import com.vaadin.data.util.BeanItem;
 final class ContactUtils {
 
     static String formatName(Item item) {
+    	Object first = item.getItemProperty(PROPERTY_FIRST_NAME).getValue();
+    	Object last = item.getItemProperty(PROPERTY_LAST_NAME).getValue();
         return String.format("%s %s",
-                item.getItemProperty("firstName").toString(),
-                item.getItemProperty("lastName")).trim();
+                first != null ? first : "",
+                last != null ? last : "").trim();
     }
 
     static String formatFieldCaption(Object propertyId) {
