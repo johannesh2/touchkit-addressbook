@@ -18,8 +18,6 @@
 
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
-import java.util.Locale;
-
 import org.vaadin.johannesh.jfokus2012.domain.Company;
 import org.vaadin.johannesh.jfokus2012.domain.EMF;
 import org.vaadin.johannesh.jfokus2012.domain.Person;
@@ -41,7 +39,6 @@ public class App extends TouchKitApplication {
     @Override
     public void init() {
         configureMainWindow();
-        setLocale(Locale.ENGLISH);
         setTheme("jfokus");
     }
 

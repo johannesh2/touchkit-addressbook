@@ -28,7 +28,7 @@ public class PersonsResource extends ServerResource {
             person = gson.fromJson(json, Person.class);
         } catch (JsonSyntaxException e) {
             setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
-            result = ModifyResult.RESULT_ERROR;
+            return gson.toJson(ModifyResult.RESULT_ERROR);
         }
         EntityManager em = EMF.getEntityManagerFactory().createEntityManager();
         try {
