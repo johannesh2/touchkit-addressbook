@@ -31,6 +31,7 @@ public class Person extends AbstractEntity {
     @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
     private String email;

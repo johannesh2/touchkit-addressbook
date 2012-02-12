@@ -1,5 +1,9 @@
 @import "../base/styles.css";
 
+.show-contact-view {
+	position: relative;
+}
+
 .favourite-off input + img {
 	opacity: 0.1;
 }
@@ -10,6 +14,12 @@ input[type = "checkbox"] {
 
 .favourite-on input + img {
 	opacity: 1;
+}
+
+.favourite-on, .favourite-off {
+	position: absolute;
+	top: 38px;
+	left: 38px;
 }
 
 /**** captions in grid-layout ****/
@@ -26,19 +36,6 @@ input[type = "checkbox"] {
 /**** Navigation ****/
 
 
-/**** ListSelect ****/
-.v-touchkit-verticalcomponentgroup .v-select-select {
-	-webkit-appearance: none;
-	border: none;
-	height: 30px;
-	font-size: 17px;
-	margin-left: 10px;
-}
-
-.v-select-select > option {
-	color: #4E64A1;	
-}
-
 /**** Table ****/
 
 .contacts .v-table-row-odd {
@@ -52,9 +49,7 @@ input[type = "checkbox"] {
 	padding: 0 10px;
 	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.5);
 	overflow: hidden;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	border-top: none;
+	border-top: none; 
 }
 
 .v-table .v-touchkit-navbutton:active {

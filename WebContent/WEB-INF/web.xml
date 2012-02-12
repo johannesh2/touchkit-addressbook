@@ -7,6 +7,17 @@
 		<param-name>productionMode</param-name>
 		<param-value>false</param-value>
 	</context-param>
+	<filter>
+		<description>
+		</description>
+		<display-name>NoStoreFilter</display-name>
+		<filter-name>NoStoreFilter</filter-name>
+		<filter-class>org.vaadin.johannesh.jfokus2012.touchkit.NoStoreFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>NoStoreFilter</filter-name>
+		<servlet-name>Application</servlet-name>
+	</filter-mapping>
 	<listener>
 		<listener-class>
   			org.vaadin.johannesh.jfokus2012.domain.EMF

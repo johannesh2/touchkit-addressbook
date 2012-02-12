@@ -56,6 +56,7 @@ public class ShowContactView extends NavigationView {
 
 	private void buildLayout() {
 		layout = new CssLayout();
+		layout.addStyleName("show-contact-view");
 		layout.setWidth("100%");
 
 		VerticalComponentGroup infoGroup = new VerticalComponentGroup("");
@@ -89,13 +90,22 @@ public class ShowContactView extends NavigationView {
 
 		Label firstName = new Label(
 				item.getItemProperty(ContactUtils.PROPERTY_FIRST_NAME));
-		firstName.setSizeUndefined();
 		firstName.addStyleName("strong-name");
 
 		Label lastName = new Label(
 				item.getItemProperty(ContactUtils.PROPERTY_LAST_NAME));
 		lastName.addStyleName("strong-name");
-		lastName.setSizeUndefined();
+
+		GridLayout nameLayout = new GridLayout(2, 2);
+		nameLayout.setWidth("100%");
+		nameLayout.setSpacing(true);
+		nameLayout.setMargin(true, true, false, true);
+		nameLayout.setColumnExpandRatio(1, 1.0f);
+		nameLayout.addComponent(picture, 0, 0, 0, 1);
+		nameLayout.addComponent(firstName, 1, 0);
+		nameLayout.addComponent(lastName, 1, 1);
+		nameLayout.setComponentAlignment(firstName, Alignment.MIDDLE_LEFT);
+		nameLayout.setComponentAlignment(lastName, Alignment.MIDDLE_LEFT);
 
 		final Favourite favourite = new Favourite();
 		favourite.setImmediate(true);
@@ -104,20 +114,8 @@ public class ShowContactView extends NavigationView {
 		favourite.setPropertyDataSource(item
 				.getItemProperty(ContactUtils.PROPERTY_FAVOURITE));
 
-		GridLayout nameLayout = new GridLayout(4, 1);
-		nameLayout.setSpacing(true);
-		nameLayout.setMargin(true, true, false, true);
-		nameLayout.setColumnExpandRatio(3, 1.0f);
-		nameLayout.setWidth("100%");
-		nameLayout.addComponent(picture);
-		nameLayout.addComponent(firstName);
-		nameLayout.addComponent(lastName);
-		nameLayout.addComponent(favourite);
-		nameLayout.setComponentAlignment(firstName, Alignment.MIDDLE_LEFT);
-		nameLayout.setComponentAlignment(lastName, Alignment.MIDDLE_LEFT);
-		nameLayout.setComponentAlignment(favourite, Alignment.MIDDLE_LEFT);
-
 		layout.addComponent(nameLayout);
+		layout.addComponent(favourite);
 		layout.addComponent(infoGroup);
 
 		Button editButton = new Button("Edit");

@@ -105,9 +105,8 @@ public class EditContactView extends NavigationView {
 		setContent(content);
 	}
 
-	static class ContactEntityView extends CssLayout {
+	private class ContactEntityView extends CssLayout {
 
-		private static final long serialVersionUID = 1L;
 		private TextField firstNameField;
 		private TextField lastNameField;
 		private CompanyField companyField;
@@ -124,6 +123,7 @@ public class EditContactView extends NavigationView {
 			lastNameField.setWidth("100%");
 			lastNameField.setNullRepresentation("");
 			companyField = new CompanyField("company");
+			companyField.setHeight("43px");
 			companyField.setWidth("100%");
 
 			mobileField = new Html5InputField("mobile", InputType.Tel);

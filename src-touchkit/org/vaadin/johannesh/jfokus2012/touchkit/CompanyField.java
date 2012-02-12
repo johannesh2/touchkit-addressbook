@@ -6,7 +6,7 @@ import org.vaadin.johannesh.jfokus2012.domain.Company;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.data.Property;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.ListSelect;
+import com.vaadin.ui.NativeSelect;
 
 /**
  * A custom field that allows selection of a Company.
@@ -14,7 +14,7 @@ import com.vaadin.ui.ListSelect;
 public class CompanyField extends CustomField {
     private static final long serialVersionUID = 1L;
 
-    private ListSelect companySelect = new ListSelect();
+    private NativeSelect companySelect;
 
     private JPAContainer<Company> container;
 
@@ -22,6 +22,9 @@ public class CompanyField extends CustomField {
         setCaption(caption);
         container = App.getCompaniesContainer();
         container.setApplyFiltersImmediately(false);
+        companySelect = new NativeSelect();
+        companySelect.setSizeUndefined();
+        companySelect.setWidth("100%");
         companySelect.setContainerDataSource(container);
         companySelect
                 .setItemCaptionPropertyId(ContactUtils.PROPERTY_COMPANY_NAME);
@@ -42,8 +45,9 @@ public class CompanyField extends CustomField {
         });
 
         CssLayout cssLayout = new CssLayout();
+        cssLayout.setSizeUndefined();
+        cssLayout.setWidth("100%");
         cssLayout.addComponent(companySelect);
-        companySelect.setSizeFull();
         setCompositionRoot(cssLayout);
     }
 
