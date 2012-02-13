@@ -73,7 +73,6 @@ public class EditContactView extends NavigationView implements Component {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				form.commit();
-				App.getPersonsContainer().addEntity(item.getEntity());
 				getNavigationManager().navigateBack();
 			}
 		});
