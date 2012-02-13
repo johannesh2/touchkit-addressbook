@@ -78,14 +78,14 @@ public class PersonsResource extends ServerResource {
 					new ExclusionStrategy() {
 
 						public boolean shouldSkipClass(Class<?> clazz) {
-							return (clazz == Company.class);
+							return false;
 						}
 
 						/**
 						 * Custom field exclusion goes here
 						 */
 						public boolean shouldSkipField(FieldAttributes f) {
-							return false;
+							return f.getName().equals("persons");
 						}
 
 					}).create();
