@@ -5,17 +5,17 @@ import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 
-public class ContactItemWrapper<T extends AbstractEntity> {
+public class ItemWrapper<T extends AbstractEntity> {
 
     private final EntityItem<T> entityItem;
     private final BeanItem<T> beanItem;
 
-    public ContactItemWrapper(EntityItem<T> entityItem) {
+    public ItemWrapper(EntityItem<T> entityItem) {
         this.entityItem = entityItem;
         this.beanItem = null;
     }
 
-    public ContactItemWrapper(BeanItem<T> beanItem) {
+    public ItemWrapper(BeanItem<T> beanItem) {
         this.entityItem = null;
         this.beanItem = beanItem;
     }

@@ -19,10 +19,7 @@
 package org.vaadin.johannesh.jfokus2012.touchkit;
 
 import org.vaadin.johannesh.jfokus2012.EMF;
-import org.vaadin.johannesh.jfokus2012.entity.Company;
 import org.vaadin.johannesh.jfokus2012.entity.Person;
-import org.vaadin.johannesh.jfokus2012.touchkit.view.ListContactsView;
-import org.vaadin.johannesh.jfokus2012.touchkit.view.ListGroupsView;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
@@ -31,59 +28,46 @@ import com.vaadin.addon.touchkit.ui.TouchKitApplication;
 import com.vaadin.addon.touchkit.ui.TouchKitWindow;
 
 public class App extends TouchKitApplication {
-    private static final long serialVersionUID = 1L;
-    
-    private TouchKitWindow mainWindow;
-    private NavigationManager navigationManager;
-    private JPAContainer<Person> persons;
-    private JPAContainer<Company> companies;
 
-    @Override
-    public void init() {
-        configureMainWindow();
-        setTheme("jfokus");
-    }
+	private static final long serialVersionUID = 1L;
 
-    private void configureMainWindow() {
-        mainWindow = new TouchKitWindow();
-        mainWindow.setCaption("JFokus 2012 - Addressbook Demo");
-        mainWindow.addApplicationIcon(57, 57, "/app/VAADIN/themes/jfokus/icon/icon.png", false);
-        mainWindow.addApplicationIcon(114, 114, "/app/VAADIN/themes/jfokus/icon/icon@2x.png", false);
-        mainWindow.setWebAppCapable(true);
-        mainWindow.setPersistentSessionCookie(true);
-        setMainWindow(mainWindow);
-    }
+	public static final String LABEL_STYLE_STRONG = "strong";
+	private static final String APP_ICON = "/app/VAADIN/themes/jfokus/icon/icon.png";
+	private static final String APP_ICON_2X = "/app/VAADIN/themes/jfokus/icon/icon@x2.png";
 
-    @Override
-    public void onBrowserDetailsReady() {
-        ListContactsView listView = new ListContactsView();
-        ListGroupsView listGroups = new ListGroupsView();
-        navigationManager = new NavigationManager();
-        navigationManager.setCurrentComponent(listView);
-        navigationManager.setPreviousComponent(listGroups);
-        mainWindow.setContent(navigationManager);
-    }
+	private TouchKitWindow mainWindow;
 
-    public static App getApp() {
-        return (App) get();
-    }
+	@Override
+	public void init() {
+		setTheme("jfokus");
+		mainWindow = new TouchKitWindow();
+		mainWindow.setCaption("Addressbook Demo @ JFokus2012");
+		mainWindow.setWebAppCapable(true);
+		mainWindow.setPersistentSessionCookie(true);
+		mainWindow.addApplicationIcon(57, 57, APP_ICON, false);
+		mainWindow.addApplicationIcon(114, 114, APP_ICON_2X, false);
+		setMainWindow(mainWindow);
+	}
 
-    public static JPAContainer<Person> getPersonsContainer() {
-        App app = getApp();
-        if (app.persons == null) {
-            app.persons = JPAContainerFactory.make(Person.class, EMF
-                    .getEntityManagerFactory().createEntityManager());
-            app.persons.addNestedContainerProperty("company.name");
-        }
-        return app.persons;
-    }
+	@Override
+	public void onBrowserDetailsReady() {
+		NavigationManager navigationManager = new NavigationManager();
+		navigationManager.setCurrentComponent(new ContactListView("Contacts"));
+		mainWindow.setContent(navigationManager);
+	}
 
-    public static JPAContainer<Company> getCompaniesContainer() {
-        App app = getApp();
-        if (app.companies == null) {
-            app.companies = JPAContainerFactory.make(Company.class, EMF
-                    .getEntityManagerFactory().createEntityManager());
-        }
-        return app.companies;
-    }
+	public static App getApp() {
+		return (App) get();
+	}
+
+	private JPAContainer<Person> persons;
+
+	public static JPAContainer<Person> getPersonsContainer() {
+		App app = getApp();
+		if (app.persons == null) {
+			app.persons = JPAContainerFactory.make(Person.class, EMF
+					.getEntityManagerFactory().createEntityManager());
+		}
+		return app.persons;
+	}
 }
